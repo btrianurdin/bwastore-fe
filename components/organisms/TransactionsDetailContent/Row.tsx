@@ -1,0 +1,18 @@
+interface Props {
+  label: string;
+  value: string | number;
+  className?: string;
+}
+
+export default function Row({ label, value, className }: Partial<Props>): JSX.Element {
+  return (
+    <p className="text-lg color-palette-1 mb-20">
+      {label}
+      <span
+        className={`purchase-details ${className}`}
+      >
+        {value}
+      </span>
+    </p>
+  );
+}
