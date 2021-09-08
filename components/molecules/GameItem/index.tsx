@@ -5,15 +5,18 @@ interface Props {
   title: string;
   category: string;
   thumbnail: string;
+  id: string;
 }
 
-export default function GameItem({ title, category, thumbnail }: Props): JSX.Element {
+export default function GameItem({
+  title, category, thumbnail, id,
+}: Props): JSX.Element {
   return (
     <div className="featured-game-card position-relative">
-      <Link href="/detail">
+      <Link href={`/detail/${id}`}>
         <a>
           <div className="blur-sharp">
-            <img className="thumbnail" src={`/img/${thumbnail}.png`} width={205} height={270} alt="Thumbnail" />
+            <Image className="thumbnail" src={thumbnail} width={205} height={270} alt="Thumbnail" />
           </div>
           <div className="cover position-absolute bottom-0 m-32">
             <div className="d-flex flex-column h-100 justify-content-between text-decoration-none">

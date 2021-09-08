@@ -23,6 +23,7 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "no-underscore-dangle": "off",
         "jsx-a11y/anchor-is-valid": "off",
         "@typescript-eslint/no-explicit-any": "off",
         "import/extensions": "off",
@@ -30,8 +31,9 @@
         "react/react-in-jsx-scope": "off",
         "react/jsx-props-no-spreading": "off",
         "@next/next/no-img-element": "off",
-        "jsx-a11y/label-has-associated-control": "warn",
+        "jsx-a11y/label-has-associated-control": "off",
         "no-use-before-define": "off",
+        "@next/next/no-page-custom-font": "off",
         "@typescript-eslint/no-use-before-define": [
             "error"
         ],

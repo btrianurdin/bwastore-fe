@@ -20,7 +20,7 @@ export default function Navbar(): JSX.Element {
               <Menu title="Discover" />
               <Menu title="Global Rank" />
 
-              <Auth isLogin />
+              <Auth />
             </ul>
           </div>
         </div>

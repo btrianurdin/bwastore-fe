@@ -14,8 +14,10 @@ import '../styles/sign-up-success.css';
 import '../styles/complete-checkout.css';
 import '../styles/transactions.css';
 import '../styles/transactions-detail.css';
+import 'react-toastify/dist/ReactToastify.css';
 import Head from 'next/head';
 import type { AppProps } from 'next/app';
+import { ToastContainer } from 'react-toastify';
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
@@ -45,6 +47,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         />
       </Head>
       <Component {...pageProps} />
+      <ToastContainer />
     </>
   );
 }

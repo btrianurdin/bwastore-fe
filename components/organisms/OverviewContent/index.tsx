@@ -1,7 +1,22 @@
+import { useCallback, useEffect, useState } from 'react';
+import { HistoryTypes, OverviewCountTypes } from '../../../services/data-types';
+import { getMemberOverview } from '../../../services/member';
 import Category from './Category';
 import TableRow from './TableRow';
 
 export default function OverviewContent(): JSX.Element {
+  const [count, setCount] = useState<OverviewCountTypes[]>([]);
+  const [history, setHistory] = useState<HistoryTypes[]>();
+
+  const getMemberOverviewApi = useCallback(async () => {
+    const res = await getMemberOverview();
+    setCount(res.count);
+    setHistory(res.history);
+  }, []);
+
+  useEffect(() => {
+    getMemberOverviewApi();
+  }, [getMemberOverviewApi]);
   return (
     <main className="main-wrapper">
       <div className="ps-lg-0">
@@ -10,21 +25,15 @@ export default function OverviewContent(): JSX.Element {
           <p className="text-lg fw-medium color-palette-1 mb-14">Top Up Categories</p>
           <div className="main-content">
             <div className="row">
-              <Category nominal={18000000} icon="desktop">
-                Game
-                <br />
-                Desktop
-              </Category>
-              <Category nominal={8445000} icon="mobile">
-                Game
-                <br />
-                Mobile
-              </Category>
-              <Category nominal={5000000} icon="desktop-other">
-                Other
-                <br />
-                Categories
-              </Category>
+              {
+                count.map((item) => (
+                  <Category key={item._id} nominal={item.value} icon="desktop">
+                    Game
+                    <br />
+                    {item.name}
+                  </Category>
+                ))
+              }
             </div>
           </div>
         </div>
@@ -41,38 +50,19 @@ export default function OverviewContent(): JSX.Element {
                 </tr>
               </thead>
               <tbody>
-                <TableRow
-                  title="Mobile Legends: The New Battle 2021"
-                  category="Desktop"
-                  image="overview-1"
-                  item={200}
-                  price={200000}
-                  status="Success"
-                />
-                <TableRow
-                  title="Call of Duty:Modern"
-                  category="Desktop"
-                  image="overview-2"
-                  item={550}
-                  price={740000}
-                  status="Success"
-                />
-                <TableRow
-                  title="Clash of Clans"
-                  category="Desktop"
-                  image="overview-3"
-                  item={100}
-                  price={120000}
-                  status="Pending"
-                />
-                <TableRow
-                  title="The Royal Game"
-                  category="Mobile"
-                  image="overview-4"
-                  item={255}
-                  price={230000}
-                  status="Failed"
-                />
+                {
+                  history?.map((item) => (
+                    <TableRow
+                      key={item._id}
+                      title={item.historyVoucherTopup.gameName}
+                      category={item.historyVoucherTopup.category}
+                      image={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${item.historyVoucherTopup.thumbnail}`}
+                      item={`${item.historyVoucherTopup.coinQuantity} ${item.historyVoucherTopup.coinName}`}
+                      price={item.value}
+                      status={item.status}
+                    />
+                  ))
+                }
               </tbody>
             </table>
           </div>

@@ -1,4 +1,6 @@
-interface Props {
+import { InputHTMLAttributes } from 'react';
+
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   [key: string]: any;
 }

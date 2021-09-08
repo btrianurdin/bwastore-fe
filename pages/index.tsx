@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import Head from 'next/head';
 import { useEffect } from 'react';
 import AOS from 'aos';
 import Navbar from '../components/organisms/Navbar';
@@ -16,6 +17,10 @@ const Home: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>StoreGG - Topup your game voucher easily</title>
+        <meta name="description" content="We provide all game voucher to you, a gamer." />
+      </Head>
       <Navbar />
       <MainBanner />
       <TransactionStep />
